@@ -38,7 +38,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # 3. create temp package file with modified dev script
-cat package.json | npx jq 'if .scripts.dev == "vite dev" then .scripts.dev="dotenv -c -- bash -c '\''npx vite dev --port ${PORT:-5173}'\''" else . end' > package.json.setup-pnpm-vite-port-env
+cat package.json | jq 'if .scripts.dev == "vite dev" then .scripts.dev="dotenv -c -- bash -c '\''npx vite dev --port ${PORT:-5173}'\''" else . end' > package.json.setup-pnpm-vite-port-env
 diff --color --ignore-all-space package.json package.json.setup-pnpm-vite-port-env
 
 # 4. Guide user
